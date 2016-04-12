@@ -21,23 +21,6 @@ class AddOfertaTable extends Migration
             $table->timestamps();
         });
         
-        
-        
-        // producto_compra
-        Schema::create('oferta_producto', function(Blueprint $table){
-            $table->increments('id');
-            $table->string('cve_producto', 16);
-            $table->integer('oferta_id')->unsigned();
-            
-            $table->foreign('cve_producto')
-                ->references('cve_producto')->on('producto')
-                ->onDelete('cascade');
-            
-            $table->foreign('oferta_id')
-                ->references('id')->on('oferta')
-                ->onDelete('cascade');
-        });
-        
     }
 
     /**
