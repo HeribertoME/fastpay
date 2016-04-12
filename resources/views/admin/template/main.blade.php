@@ -3,8 +3,6 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="A front-end template that helps you build fast, modern mobile web apps.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@yield('title', 'Default') | Dashboard</title>
 
@@ -15,7 +13,6 @@
     <link rel="shortcut icon" href="images/fastpay.png">
 
     <link href="{{ asset('css/personal.css') }}">
-    <link href="{{ asset('plugins/material/css/') }}">
     <link href="{{ asset('fonts/fonts.css')}}" rel="stylesheet">
     <link href="{{ asset('fonts/icons.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('plugins/material/css/material.min.css') }}">

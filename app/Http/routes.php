@@ -27,6 +27,11 @@ Route::group(['prefix' => 'admin'], function(){
         'uses'  =>  'ProductosController@destroy',
         'as'    =>  'admin.products.destroy'
     ]);
-    
+
     Route::resource('ofertas', 'OfertaController');
 });
+
+// Authentication routes...
+Route::get('auth/login', 'Auth\AuthController@getLogin');
+Route::post('auth/login', 'Auth\AuthController@postLogin');
+Route::get('auth/logout', 'Auth\AuthController@getLogout');

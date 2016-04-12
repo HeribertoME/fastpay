@@ -61,4 +61,12 @@ class AuthController extends Controller
             'password' => bcrypt($data['password']),
         ]);
     }
+
+    /**
+     * @return string
+     */
+    protected function getLogin()
+    {
+        return view('auth.login');
+    }
 }
