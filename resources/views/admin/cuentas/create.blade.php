@@ -69,15 +69,6 @@
             </div>
         </div>
 
-        <div class="row">
-            <div class="input-field col s12">
-                {!! Form::select('type', ['' => 'Seleccione tipo', 'member' => 'Miembro', 'admin' => 'Administrador'],
-                null) !!}
-                {!! Form::label('type', 'Tipo') !!}
-            </div>
-        </div>
-
-
         <button class="btn waves-effect waves-light" type="submit" name="action">Registrar
             <i class="material-icons right">send</i>
         </button>

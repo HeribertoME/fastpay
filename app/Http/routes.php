@@ -11,11 +11,17 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [
+    'as'    =>  'front.index' ,
+    'uses'  =>  'FrontController@index'
+]);
 
-Route::group(['prefix' => 'admin'], function(){
+
+Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function(){
+    Route::get('/', ['as' => 'admin.index' ,function () {
+        return view('admin.index');
+    }]);
+
     Route::resource('cuentas','CuentasController');
     Route::get('cuentas/{id}/destroy', [
         'uses'  =>  'CuentasController@destroy',
@@ -27,11 +33,34 @@ Route::group(['prefix' => 'admin'], function(){
         'uses'  =>  'ProductosController@destroy',
         'as'    =>  'admin.products.destroy'
     ]);
+    
+    Route::resource('users', 'UsersController');
+    Route::get('users/{id}/destroy',[
+        'uses'  =>  'UsersController@destroy',
+        'as'    =>  'admin.users.destroy'
+    ]);
 
     Route::resource('ofertas', 'OfertaController');
+    Route::get('ofertas/{id}/destroy',[
+        'uses'  =>  'OfertaController@destroy',
+        'as'    =>  'admin.ofertas.destroy'
+    ]);
 });
 
-// Authentication routes...
-Route::get('auth/login', 'Auth\AuthController@getLogin');
-Route::post('auth/login', 'Auth\AuthController@postLogin');
-Route::get('auth/logout', 'Auth\AuthController@getLogout');
+/*
+ * Rutas para el inicio de sesión
+ */
+Route::get('admin/auth/login', [
+    'uses'  =>  'Auth\AuthController@getLogin',
+    'as'    =>  'admin.auth.login'
+]);
+
+Route::post('admin/auth/login', [
+    'uses'  =>  'Auth\AuthController@postLogin',
+    'as'    =>  'admin.auth.login'
+]);
+
+Route::get('admin/auth/logout', [
+    'uses'  =>  'Auth\AuthController@getLogout',
+    'as'    =>  'admin.auth.logout'
+]);

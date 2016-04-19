@@ -8,7 +8,7 @@
     <ul class="collection">
     @foreach($cuentas as $cuenta)
         <li class="collection-item avatar">
-            <img src="{{ asset('images/user.jpg') }}" alt="" class="circle">
+            <img src="{{ asset('images/cuentas/' . $cuenta->foto) }}" alt="" class="circle">
             <span class="title">{{ $cuenta->nombre . " " . $cuenta->ap_paterno . " " . $cuenta->ap_materno }}</span>
             <p>{{ $cuenta->user }} <br>
                 @if($cuenta->type == "admin")

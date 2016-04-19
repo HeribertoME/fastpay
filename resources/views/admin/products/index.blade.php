@@ -50,7 +50,7 @@
                     <td>
                         <img class="materialboxed" data-caption="A picture of some deer and tons of trees"
                              width="50"
-                             src="{{asset('images/products/dog.png')}}">
+                             src="{{asset('images/products/'. $product->imagen)}}">
                     </td>
                     <td>{{$product->caducidad}}</td>
                     <td>{{$product->descripcion}}</td>

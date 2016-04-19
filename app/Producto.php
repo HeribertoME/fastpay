@@ -24,11 +24,6 @@ class Producto extends Model
         return $this->belongsToMany('App\Compra_gral')->withTimestamps();
     }
     
-    public function ofertas()
-    {
-        return $this->belongsToMany('App\Oferta')->withTimestamps();
-    }
-
     public function scopeSearch($query, $nombre)
     {
         return $query->where('nombre', 'LIKE', "%$nombre%");

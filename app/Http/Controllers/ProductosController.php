@@ -40,7 +40,12 @@ class ProductosController extends Controller
      */
     public function store(ProductoRequest $request)
     {
+        $file = $request->file('imagen');
+        $imagen = $request->cve_producto . '.' . $file->getClientOriginalExtension();
+        $path = public_path() . '/images/products/';
+        $file->move($path, $imagen);
         $producto = new Producto($request->all());
+        $producto->imagen = $imagen;
         $producto->save();
         return redirect()->route('admin.products.index');
     }

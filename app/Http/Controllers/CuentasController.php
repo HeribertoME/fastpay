@@ -40,11 +40,16 @@ class CuentasController extends Controller
      */
     public function store(CuentaRequest $request)
     {
-
+        $file = $request->file('foto');
+        $foto = $request->user . '.' . $file->getClientOriginalExtension();
+        $path = public_path() . '/images/cuentas/';
+        $file->move($path, $foto);
         $cuenta = new Cuenta($request->all());
+        $cuenta->foto = $foto;
         $cuenta->pass = bcrypt($request->pass);
         $cuenta->save();
         return redirect()->route('admin.cuentas.index')->withSuccess('Registrado correctamente');
+
     }
 
     /**
