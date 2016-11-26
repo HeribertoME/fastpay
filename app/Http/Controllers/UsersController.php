@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use Grimthorr\LaravelToast\Toast;
 use Illuminate\Http\Request;
+
+use App\User;
+use App\Http\Requests\UserRequest;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Cuenta;
-use App\Http\Requests\CuentaRequest;
 
-class CuentasController extends Controller
+
+class UsersController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,9 +19,8 @@ class CuentasController extends Controller
      */
     public function index()
     {
-
-        $cuentas = Cuenta::orderBy('cve_cuenta', 'ASC')->paginate(5);
-        return view('admin.cuentas.index')->with('cuentas', $cuentas);
+        $users = User::orderBy('id', 'ASC')->paginate(5);
+        return view('admin.users.index')->with('users', $users);
     }
 
     /**
@@ -30,7 +30,7 @@ class CuentasController extends Controller
      */
     public function create()
     {
-        return view('admin.cuentas.create');
+        return view('admin.users.create');
     }
 
     /**
@@ -39,17 +39,15 @@ class CuentasController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CuentaRequest $request)
+    public function store(UserRequest $request)
     {
-        $file = $request->file('foto');
-        $foto = $request->user . '.' . $file->getClientOriginalExtension();
-        $path = public_path() . '/images/cuentas/';
-        $file->move($path, $foto);
-        $cuenta = new Cuenta($request->all());
-        $cuenta->foto = $foto;
-        $cuenta->pass = bcrypt($request->pass);
-        $cuenta->save();
-        return redirect()->route('admin.cuentas.index')->withSuccess('Registrado correctamente');
+        $name = $request->name . " " . $request->apellido;
+        $user = new User($request->all());
+        $user->name = $name;
+        $user->password = bcrypt($request->password);
+        $user->save();
+        
+        return redirect()->route('admin.users.index');
 
     }
 
@@ -72,8 +70,8 @@ class CuentasController extends Controller
      */
     public function edit($id)
     {
-        $cuenta = Cuenta::find($id);
-        return view('admin.cuentas.edit')->with('cuenta', $cuenta);
+        $user = User::find($id);
+        return view('admin.users.edit')->with('user', $user);
     }
 
     /**
@@ -85,11 +83,11 @@ class CuentasController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $cuenta = Cuenta::find($id);
-        $cuenta->fill($request->all());
-        $cuenta->save();
+        $user = User::find($id);
+        $user->fill($request->all());
+        $user->save();
 
-        return redirect()->route('admin.cuentas.index');
+        return redirect()->route('admin.users.index');
     }
 
     /**
@@ -100,8 +98,9 @@ class CuentasController extends Controller
      */
     public function destroy($id)
     {
-        $cuenta = Cuenta::find($id);
-        $cuenta->delete();
-        return redirect()->route('admin.cuentas.index');
+        $user = User::find($id);
+        $user->delete();
+        
+        return redirect()->route('admin.users.index');
     }
 }

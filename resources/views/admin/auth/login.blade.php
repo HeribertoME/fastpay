@@ -39,7 +39,8 @@
         {!! Form::open(['route' => 'admin.auth.login', 'method' => 'POST', 'class' => 'login-form']) !!}
         <div class="row">
             <div class="input-field col s12 center">
-                <img src="{{ asset('images/logo.png') }}" alt="" class="responsive-img valign profile-image-login">
+                <img src="{{ asset('images/logo.png') }}"  class="responsive-img valign profile-image-login">
+                <p class="center login-form-text">Fast-Pay</p>
             </div>
         </div>
         <div class="row margin">
